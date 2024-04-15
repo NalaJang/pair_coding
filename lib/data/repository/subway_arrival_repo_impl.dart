@@ -11,8 +11,8 @@ class SubwayArrivalRepositoryImpl implements SubwayArrivalRepository {
   }) : _subwayApi = subwayApi;
 
   @override
-  Future<List<SubWayModel>> getArrivals() async {
-    List<SubWayModel> dataList = [];
+  Future<List<SubwayModel>> getArrivals() async {
+    List<SubwayModel> dataList = [];
     final subwayData = await _subwayApi.getRealTimeStationArrival();
 
     if (subwayData.realtimeArrivalList == null) {

@@ -1,4 +1,4 @@
-class SubWayModel {
+class SubwayModel {
   final num subwayId;
   final String updnLine;
   final String statnFid; // 이전 역 이름
@@ -11,7 +11,7 @@ class SubWayModel {
   final String barvlDt; // 열차 도착 예정 시간
   final String recptnDt; // 열차 도착 정보를 생성한 시각
 
-  const SubWayModel({
+  const SubwayModel({
     required this.subwayId,
     required this.updnLine,
     required this.statnFid,
@@ -41,8 +41,8 @@ class SubWayModel {
     };
   }
 
-  factory SubWayModel.fromJson(Map<String, dynamic> json) {
-    return SubWayModel(
+  factory SubwayModel.fromJson(Map<String, dynamic> json) {
+    return SubwayModel(
       subwayId: json['subwayId'] as num,
       updnLine: json['updnLine'] as String,
       statnFid: json['statnFid'] as String,
