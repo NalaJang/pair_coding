@@ -44,61 +44,78 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Text(
-              //   '시간',
-              // ),
+              Text('위치'),
               Text('도착지'),
               Text('열차 종류'),
               Text('열차 번호'),
             ],
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: viewModel.subways.length,
-              itemBuilder: (context, index) {
-                return Column(
+            child: ListView(
+              children: [
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: viewModel.subways
                       .map((e) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              // SizedBox(
-                              //   width: 100,
-                              //   child: Text(
-                              //     e.barvlDt,
-                              //     overflow: TextOverflow.ellipsis,
-                              //     style: TextStyle(
-                              //       color:
-                              //           index == 0 ? Colors.red : Colors.black,
-                              //     ),
-                              //   ),
-                              // ),
-                              Text(
-                                e.trainLineNm,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(
-                                width: 50,
-                                child: Text(
-                                  e.btrainSttus,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 50,
-                                child: Text(
-                                  '${e.btrainNo}',
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ))
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // 위치
+                      SizedBox(
+                        // width: 100,
+                        child: Text(
+                          e.arrvalMessage,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color:
+                            viewModel.subways[0] == e ? Colors.red : Colors.black,
+                          ),
+                        ),
+                      ),
+
+                      // 도착지
+                      SizedBox(
+                        child: Text(
+                          e.trainLineNm,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color:
+                            viewModel.subways[0] == e ? Colors.red : Colors.black,
+                          ),
+                        ),
+                      ),
+
+                      // 열차 종류
+                      SizedBox(
+                        child: Text(
+                          e.btrainSttus,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color:
+                            viewModel.subways[0] == e ? Colors.red : Colors.black,
+                          ),
+                        ),
+                      ),
+
+                      // 열차 번호
+                      SizedBox(
+                        // width: 50,
+                        child: Text(
+                          '${e.btrainNo}',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color:
+                            viewModel.subways[0] == e ? Colors.red : Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ))
                       .toList(),
-                );
-              },
-            ),
+                )
+              ],
+            )
           ),
         ],
       ),
