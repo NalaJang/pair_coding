@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pair_coding/presentation/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -10,18 +12,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   void initState() {
     super.initState();
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<HomeViewModel>();
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -45,19 +44,50 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: viewModel.subways.map((e) => Row(
-                      children: [
-                        Text(e.barvlDt),
-                        Text(e.trainLineNm),
-                        Text(e.btrainSttus),
-                        Text('${e.btrainNo}'),
-                      ],
-                    )).toList(),
+              child: FutureBuilder(
+                future: viewModel.getSubwayArrivalData(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: viewModel.subways.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: viewModel.subways
+                            .map((e) => Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      child: Text(
+                                        e.barvlDt,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 50,
+                                      child: Text(
+                                        e.trainLineNm,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 50,
+                                      child: Text(
+                                        e.btrainSttus,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 50,
+                                      child: Text(
+                                        '${e.btrainNo}',
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ))
+                            .toList(),
+                      );
+                    },
                   );
                 },
               ),
