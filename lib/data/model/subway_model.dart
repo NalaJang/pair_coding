@@ -27,17 +27,17 @@ class SubwayModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'subwayId': this.subwayId,
-      'updnLine': this.updnLine,
-      'statnFid': this.statnFid,
-      'statnTid': this.statnTid,
-      'statnNm': this.statnNm,
-      'trainLineNm': this.trainLineNm,
-      'arrvalMessage': this.arrvalMessage,
-      'btrainNo': this.btrainNo,
-      'btrainSttus': this.btrainSttus,
-      'barvlDt': this.barvlDt,
-      'recptnDt': this.recptnDt,
+      'subwayId': subwayId,
+      'updnLine': updnLine,
+      'statnFid': statnFid,
+      'statnTid': statnTid,
+      'statnNm': statnNm,
+      'trainLineNm': trainLineNm,
+      'arrvalMessage': arrvalMessage,
+      'btrainNo': btrainNo,
+      'btrainSttus': btrainSttus,
+      'barvlDt': barvlDt,
+      'recptnDt': recptnDt,
     };
   }
 
