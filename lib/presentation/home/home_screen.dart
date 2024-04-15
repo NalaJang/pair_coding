@@ -22,78 +22,87 @@ class _HomeScreenState extends State<HomeScreen> {
     final viewModel = context.watch<HomeViewModel>();
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('현재 시간'),
-                Text('시간'),
-                Text('출발'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('시간'),
-                Text('도착지'),
-                Text('열차 종류'),
-                Text('열차 번호'),
-              ],
-            ),
-            Expanded(
-              child: FutureBuilder(
-                future: viewModel.getSubwayArrivalData(),
-                builder: (context, snapshot) {
-                  return ListView.builder(
-                    itemCount: viewModel.subways.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: viewModel.subways
-                            .map((e) => Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      child: Text(
-                                        e.barvlDt,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 50,
-                                      child: Text(
-                                        e.trainLineNm,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 50,
-                                      child: Text(
-                                        e.btrainSttus,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 50,
-                                      child: Text(
-                                        '${e.btrainNo}',
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ))
-                            .toList(),
-                      );
-                    },
-                  );
-                },
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('출발'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 60,
+          ),
+          Row(
+            children: [
+              Row(
+                children: [
+                  Text('현재 시간'),
+                  Text('시간'),
+                ],
               ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('시간'),
+              Text('도착지'),
+              Text('열차 종류'),
+              Text('열차 번호'),
+            ],
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: viewModel.getSubwayArrivalData(),
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: viewModel.subways.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: viewModel.subways
+                          .map((e) => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    width: 50,
+                                    child: Text(
+                                      e.barvlDt,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 50,
+                                    child: Text(
+                                      e.trainLineNm,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 50,
+                                    child: Text(
+                                      e.btrainSttus,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 50,
+                                    child: Text(
+                                      '${e.btrainNo}',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ))
+                          .toList(),
+                    );
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
