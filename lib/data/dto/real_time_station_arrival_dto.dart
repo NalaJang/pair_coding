@@ -1,10 +1,10 @@
-class RealTimeStationArrival {
-  RealTimeStationArrival({
+class RealTimeStationArrivalDto {
+  RealTimeStationArrivalDto({
     this.errorMessage,
     this.realtimeArrivalList,
   });
 
-  RealTimeStationArrival.fromJson(dynamic json) {
+  RealTimeStationArrivalDto.fromJson(dynamic json) {
     errorMessage = json['errorMessage'] != null
         ? ErrorMessage.fromJson(json['errorMessage'])
         : null;
