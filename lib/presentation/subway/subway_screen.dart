@@ -2,28 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:pair_coding/presentation/home/home_view_model.dart';
+import 'package:pair_coding/presentation/subway/subway_view_model.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SubwayScreen extends StatefulWidget {
+  const SubwayScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SubwayScreen> createState() => _SubwayScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SubwayScreenState extends State<SubwayScreen> {
   @override
   void initState() {
     super.initState();
 
     Future.microtask(
-        () => context.read<HomeViewModel>().getSubwayArrivalData());
+        () => context.read<SubwayViewModel>().getSubwayArrivalData());
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<HomeViewModel>();
+    final viewModel = context.watch<SubwayViewModel>();
     final currentTime = DateFormat("hh시 mm분").format(DateTime.now());
 
     return Scaffold(

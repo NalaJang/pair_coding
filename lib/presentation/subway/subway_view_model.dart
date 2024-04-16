@@ -3,11 +3,11 @@ import 'package:pair_coding/data/repository/subway_arrival_repository.dart';
 
 import '../../data/model/subway_model.dart';
 
-class HomeViewModel with ChangeNotifier {
+class SubwayViewModel with ChangeNotifier {
   List<SubwayModel> subways = [];
   final SubwayArrivalRepository subwayRepository;
 
-  HomeViewModel({
+  SubwayViewModel({
     required this.subwayRepository,
   });
 
