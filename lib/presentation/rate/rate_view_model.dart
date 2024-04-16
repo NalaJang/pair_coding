@@ -9,8 +9,8 @@ class RateViewModel with ChangeNotifier {
   Rate _rate = const Rate(timeLastUpdateUtc: '', conversionRates: []);
   final _inputController = TextEditingController();
   final _outputController = TextEditingController();
-  num _outputPrice = 0;
   num _inputPrice = 0;
+  num _outputPrice = 0;
 
   RateViewModel({
     required this.repository,
@@ -33,6 +33,10 @@ class RateViewModel with ChangeNotifier {
 
   get outputController => _outputController;
 
+  num get inputPrice => _inputPrice;
+
+  num get outputPrice => _outputPrice;
+
   void getRate() async {
     _rate = await repository.getRate();
     _inputDropdownValue = _rate.conversionRates.first.country;
@@ -53,14 +57,17 @@ class RateViewModel with ChangeNotifier {
     final outputRate = _rate.conversionRates
         .firstWhere((element) => element.country == outputDropdownValue);
 
-    final outPutPrice =
+    _outputPrice =
         (num.tryParse(_inputController.text) ?? 0 / inputRate.rate) *
             outputRate.rate;
 
+    print('inputRate.rate : ${inputRate.rate}');
+    print('outputRate.rate : ${outputRate.rate}');
 
+    _outputController.text = _outputPrice.toString();
 
+    notifyListeners();
     /// 1. 나라 이름으로 환율을 찾는다.
     /// 2. (인풋 가격 / 인풋 기본 가격) = 배 수 X 아웃풋 나라 환율
-
   }
 }
