@@ -42,7 +42,7 @@ class _RateScreenState extends State<RateScreen> {
                         // flex: 1,
                         child: TextFormField(
                           controller: viewModel.inputController,
-                          onEditingComplete: () => viewModel.calculateOutputRate(),
+                          onChanged: (value) => viewModel.calculateOutputRate(),
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
@@ -74,7 +74,7 @@ class _RateScreenState extends State<RateScreen> {
                       Flexible(
                         child: TextFormField(
                           controller: viewModel.outputController,
-                          onEditingComplete: () => viewModel.calculateInputRate(),
+                          onChanged: (value) => viewModel.calculateInputRate(),
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(

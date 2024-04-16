@@ -79,13 +79,10 @@ class RateViewModel with ChangeNotifier {
     final outputRate = _rate.conversionRates
         .firstWhere((element) => element.country == outputDropdownValue);
 
-    _inputPrice =
-        (num.tryParse(_outputController.text) ?? 0 / outputRate.rate) *
-            inputRate.rate;
+    _inputPrice = (inputRate.rate / outputRate.rate);
 
 
     _inputController.text = _inputPrice.toString();
-    print(_inputController.text);
 
     notifyListeners();
 
