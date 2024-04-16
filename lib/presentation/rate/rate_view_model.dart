@@ -4,7 +4,7 @@ import 'package:pair_coding/data/repository/rate_repository.dart';
 
 class RateViewModel with ChangeNotifier {
   final RateRepository repository;
-  late Rate _rate;
+  Rate _rate = const Rate(timeLastUpdateUtc: '', conversionRates: []);
 
   RateViewModel({
     required this.repository,

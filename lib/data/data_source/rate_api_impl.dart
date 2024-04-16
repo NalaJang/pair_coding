@@ -10,7 +10,7 @@ class RateApiImpl implements RateApi{
   Future<RateDto> getRateDto() async {
     final apiKey = dotenv.env['API_KEY'];
     final response = await http.get(Uri.parse(
-        'https://v6.exchangerate-api.com/v6/$apiKey/codes'));
+        'https://v6.exchangerate-api.com/v6/$apiKey/latest/USD'));
 
     return RateDto.fromJson(jsonDecode(response.body));
   }

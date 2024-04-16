@@ -13,9 +13,7 @@ class _RateScreenState extends State<RateScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => {
-    context.read<RateViewModel>().getRate()
-    });
+    Future.microtask(() => {context.read<RateViewModel>().getRate()});
   }
 
   @override
@@ -26,10 +24,14 @@ class _RateScreenState extends State<RateScreen> {
       appBar: AppBar(
         title: const Text('환율'),
       ),
-      
       body: Column(
         children: [
-          Text(viewModel.rate.conversionRates.first['currency'])
+          Text(viewModel.rate.timeLastUpdateUtc),
+          ListView(
+            children: viewModel.rate.conversionRates
+                .map((e) => Text('${e.keys}'))
+                .toList(),
+          )
         ],
       ),
     );
