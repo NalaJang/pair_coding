@@ -21,10 +21,7 @@ class Rate {
 
   @override
   String toString() {
-    return 'Rate{' +
-        ' timeLastUpdateUtc: $timeLastUpdateUtc,' +
-        ' conversionRates: $conversionRates,' +
-        '}';
+    return 'Rate{ timeLastUpdateUtc: $timeLastUpdateUtc, conversionRates: $conversionRates,}';
   }
 
   Rate copyWith({
@@ -39,8 +36,8 @@ class Rate {
 
   Map<String, dynamic> toMap() {
     return {
-      'timeLastUpdateUtc': this.timeLastUpdateUtc,
-      'conversionRates': this.conversionRates,
+      'timeLastUpdateUtc': timeLastUpdateUtc,
+      'conversionRates': conversionRates,
     };
   }
 
