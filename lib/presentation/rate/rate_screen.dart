@@ -22,7 +22,7 @@ class _RateScreenState extends State<RateScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<RateViewModel>();
-    String? dropdownValue = viewModel.rate.conversionRates.first.country;
+    String dropdownValue = viewModel.rate.conversionRates.first.country;
 
     return Scaffold(
       appBar: AppBar(
@@ -52,18 +52,29 @@ class _RateScreenState extends State<RateScreen> {
 
               DropdownButton(
                 value: dropdownValue,
-                // items: viewModel.rate.conversionRates.map((e) => e.country).toList(),
-                items: viewModel.rate.conversionRates.map<DropdownMenuItem<ConversionRate>>((ConversionRate value) {
-                  return DropdownMenuItem<ConversionRate> (
-                    value: value,
-                    child: Text(value.country),
-                  );
-                }).toList(),
+                items: viewModel.rate.conversionRates
+                    .map((e) => DropdownMenuItem<String>(
+                          value: e.country,
+                          child: Text(e.country),
+                        ))
+                    .toList(),
                 onChanged: (value) {
                   setState(() {
                     dropdownValue = value!;
                   });
                 },
+
+                // viewModel.rate.conversionRates.map<DropdownMenuItem<String>>((String value) {
+                //   return DropdownMenuItem<String> (
+                //     value: value,
+                //     child: Text(value),
+                //   );
+                // }).toList(),
+                // onChanged: (value) {
+                //   setState(() {
+                //     dropdownValue = value!;
+                //   });
+                // },
               ),
             ],
           ),

@@ -1,5 +1,5 @@
 class ConversionRate {
-  final String country;
+   final String country;
   final num rate;
 
 //<editor-fold desc="Data Methods">
