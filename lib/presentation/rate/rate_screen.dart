@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pair_coding/presentation/rate/rate_view_model.dart';
+import 'package:provider/provider.dart';
 
 class RateScreen extends StatefulWidget {
   const RateScreen({super.key});
@@ -9,7 +11,17 @@ class RateScreen extends StatefulWidget {
 
 class _RateScreenState extends State<RateScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => {
+    context.read<RateViewModel>().getRate()
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<RateViewModel>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('환율'),
