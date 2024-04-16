@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:pair_coding/data/model/rate_model.dart';
 import 'package:pair_coding/data/repository/rate_repository.dart';
@@ -50,7 +51,9 @@ class RateViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void calculateRate() {
+  void calculateOutputRate() {
+    /// 1. 나라 이름으로 환율을 찾는다.
+    /// 2. (인풋 가격 / 인풋 기본 가격) = 배 수 X 아웃풋 나라 환율
     final inputRate = _rate.conversionRates
         .firstWhere((element) => element.country == inputDropdownValue);
 
@@ -61,13 +64,30 @@ class RateViewModel with ChangeNotifier {
         (num.tryParse(_inputController.text) ?? 0 / inputRate.rate) *
             outputRate.rate;
 
-    print('inputRate.rate : ${inputRate.rate}');
-    print('outputRate.rate : ${outputRate.rate}');
-
     _outputController.text = _outputPrice.toString();
 
     notifyListeners();
+
+  }
+
+  void calculateInputRate() {
     /// 1. 나라 이름으로 환율을 찾는다.
-    /// 2. (인풋 가격 / 인풋 기본 가격) = 배 수 X 아웃풋 나라 환율
+    /// 2. (아웃풋 가격 / 인풋 기본 가격) = 배 수 X 아웃풋 나라 환율
+    final inputRate = _rate.conversionRates
+        .firstWhere((element) => element.country == inputDropdownValue);
+
+    final outputRate = _rate.conversionRates
+        .firstWhere((element) => element.country == outputDropdownValue);
+
+    _inputPrice =
+        (num.tryParse(_outputController.text) ?? 0 / outputRate.rate) *
+            inputRate.rate;
+
+
+    _inputController.text = _inputPrice.toString();
+    print(_inputController.text);
+
+    notifyListeners();
+
   }
 }

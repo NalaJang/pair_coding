@@ -32,8 +32,8 @@ class _RateScreenState extends State<RateScreen> {
               child: CircularProgressIndicator(),
             )
           : Padding(
-            padding:const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
                 children: [
                   Text(viewModel.rate.timeLastUpdateUtc),
                   Row(
@@ -42,7 +42,7 @@ class _RateScreenState extends State<RateScreen> {
                         // flex: 1,
                         child: TextFormField(
                           controller: viewModel.inputController,
-                          onChanged: (value) => viewModel.calculateRate(),
+                          onEditingComplete: () => viewModel.calculateOutputRate(),
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
@@ -55,7 +55,6 @@ class _RateScreenState extends State<RateScreen> {
                           ),
                         ),
                       ),
-
                       DropdownButton(
                         value: viewModel.inputDropdownValue,
                         items: viewModel.rate.conversionRates
@@ -65,17 +64,17 @@ class _RateScreenState extends State<RateScreen> {
                                 ))
                             .toList(),
                         onChanged: (value) {
-                          viewModel.changeCountry(value!,true);
+                          viewModel.changeCountry(value!, true);
                         },
                       ),
                     ],
                   ),
-
                   Row(
                     children: [
                       Flexible(
                         child: TextFormField(
                           controller: viewModel.outputController,
+                          onEditingComplete: () => viewModel.calculateInputRate(),
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
@@ -88,25 +87,23 @@ class _RateScreenState extends State<RateScreen> {
                           ),
                         ),
                       ),
-
                       DropdownButton(
                         value: viewModel.outputDropdownValue,
                         items: viewModel.rate.conversionRates
                             .map((e) => DropdownMenuItem<String>(
-                          value: e.country,
-                          child: Text(e.country),
-                        ))
+                                  value: e.country,
+                                  child: Text(e.country),
+                                ))
                             .toList(),
                         onChanged: (value) {
-                          viewModel.changeCountry(value!,false);
+                          viewModel.changeCountry(value!, false);
                         },
                       ),
                     ],
                   ),
-
                 ],
               ),
-          ),
+            ),
     );
   }
 }
