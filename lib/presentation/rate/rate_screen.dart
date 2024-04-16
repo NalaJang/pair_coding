@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:pair_coding/data/model/conversion_rate.dart';
 import 'package:pair_coding/presentation/rate/rate_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -38,72 +37,65 @@ class _RateScreenState extends State<RateScreen> {
                   Text(viewModel.rate.timeLastUpdateUtc),
                   Row(
                     children: [
-                      Flexible(
-                        // flex: 1,
-                        child: TextFormField(
-                          controller: viewModel.inputController,
-                          onChanged: (value) => viewModel.calculateOutputRate(),
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            hintText: '가격 입력',
-                            border: InputBorder.none,
-                          ),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 13,
-                          ),
-                        ),
+                      _textFormField(
+                        viewModel.inputController,
+                        viewModel.calculateOutputRate,
                       ),
-                      DropdownButton(
-                        value: viewModel.inputDropdownValue,
-                        items: viewModel.rate.conversionRates
-                            .map((e) => DropdownMenuItem<String>(
-                                  value: e.country,
-                                  child: Text(e.country),
-                                ))
-                            .toList(),
-                        onChanged: (value) {
-                          viewModel.changeCountry(value!, true);
-                        },
+                      _dropdownButton(
+                        viewModel.inputDropdownValue,
+                        viewModel,
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      Flexible(
-                        child: TextFormField(
-                          controller: viewModel.outputController,
-                          onChanged: (value) => viewModel.calculateInputRate(),
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            hintText: '가격 입력',
-                            border: InputBorder.none,
-                          ),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 13,
-                          ),
-                        ),
+                      _textFormField(
+                        viewModel.outputController,
+                        viewModel.calculateInputRate,
                       ),
-                      DropdownButton(
-                        value: viewModel.outputDropdownValue,
-                        items: viewModel.rate.conversionRates
-                            .map((e) => DropdownMenuItem<String>(
-                                  value: e.country,
-                                  child: Text(e.country),
-                                ))
-                            .toList(),
-                        onChanged: (value) {
-                          viewModel.changeCountry(value!, false);
-                        },
+                      _dropdownButton(
+                        viewModel.outputDropdownValue,
+                        viewModel,
                       ),
                     ],
                   ),
                 ],
               ),
             ),
+    );
+  }
+
+  Widget _textFormField(TextEditingController controller, Function calculate) {
+    return Flexible(
+      child: TextFormField(
+        controller: controller,
+        onChanged: (value) => calculate(),
+        textInputAction: TextInputAction.done,
+        keyboardType: TextInputType.number,
+        decoration: const InputDecoration(
+          hintText: '0.0',
+          border: InputBorder.none,
+        ),
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 13,
+        ),
+      ),
+    );
+  }
+
+  Widget _dropdownButton(String value, RateViewModel viewModel) {
+    return DropdownButton(
+      value: value,
+      items: viewModel.rate.conversionRates
+          .map((e) => DropdownMenuItem<String>(
+                value: e.country,
+                child: Text(e.country),
+              ))
+          .toList(),
+      onChanged: (value) {
+        viewModel.changeCountry(value!, false);
+      },
     );
   }
 }

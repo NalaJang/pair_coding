@@ -69,15 +69,16 @@ class RateViewModel with ChangeNotifier {
 
   void calculateInputRate() {
     /// 1. 나라 이름으로 환율을 찾는다.
-    /// 2. (아웃풋 가격 / 인풋 기본 가격) = 배 수 X 아웃풋 나라 환율
-    final inputRate = _rate.conversionRates
-        .firstWhere((element) => element.country == inputDropdownValue);
+    /// 2. (아웃풋 가격) / 아웃풋 기본 가격) = 배 수 X 아웃풋 나라 환율
+    // final inputRate = _rate.conversionRates
+    //     .firstWhere((element) => element.country == inputDropdownValue);
 
     final outputRate = _rate.conversionRates
         .firstWhere((element) => element.country == outputDropdownValue);
 
-    _inputPrice =
-        (num.tryParse(_outputController.text) ?? 0) / outputRate.rate * inputRate.rate;
+    _inputPrice = (num.tryParse(_outputController.text) ?? 0) / outputRate.rate;
+    // (num.tryParse(_outputController.text) ?? 0) / outputRate.rate * inputRate.rate;
+
     _inputController.text = _inputPrice.toString();
 
     notifyListeners();
