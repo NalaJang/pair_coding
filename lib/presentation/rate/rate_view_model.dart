@@ -14,7 +14,7 @@ class RateViewModel with ChangeNotifier {
 
   void getRate() async {
     _rate = await repository.getRate();
-    // print(_rate.conversionRates.length);
+    print(_rate.conversionRates.length);
 
     notifyListeners();
   }
