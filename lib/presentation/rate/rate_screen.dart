@@ -26,6 +26,12 @@ class _RateScreenState extends State<RateScreen> {
       appBar: AppBar(
         title: const Text('환율'),
       ),
+      
+      body: Column(
+        children: [
+          Text(viewModel.rate.conversionRates.first['currency'])
+        ],
+      ),
     );
   }
 }
