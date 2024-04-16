@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:pair_coding/data/model/rate_model.dart';
 import 'package:pair_coding/data/repository/rate_repository.dart';
@@ -60,14 +59,12 @@ class RateViewModel with ChangeNotifier {
     final outputRate = _rate.conversionRates
         .firstWhere((element) => element.country == outputDropdownValue);
 
-    _outputPrice =
-        (num.tryParse(_inputController.text) ?? 0 / inputRate.rate) *
-            outputRate.rate;
+    _outputPrice = (num.tryParse(_inputController.text) ?? 0 / inputRate.rate) *
+        outputRate.rate;
 
     _outputController.text = _outputPrice.toString();
 
     notifyListeners();
-
   }
 
   void calculateInputRate() {
@@ -79,12 +76,10 @@ class RateViewModel with ChangeNotifier {
     final outputRate = _rate.conversionRates
         .firstWhere((element) => element.country == outputDropdownValue);
 
-    _inputPrice = (inputRate.rate / outputRate.rate);
-
-
+    _inputPrice =
+        (num.tryParse(_outputController.text) ?? 0) / outputRate.rate * inputRate.rate;
     _inputController.text = _inputPrice.toString();
 
     notifyListeners();
-
   }
 }
