@@ -1,4 +1,5 @@
 class Rate{
+  final String timeLastUpdateUtc;
   final String country;
   final String rate;
 
