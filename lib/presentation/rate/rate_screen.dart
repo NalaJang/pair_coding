@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pair_coding/presentation/rate/rate_view_model.dart';
 import 'package:provider/provider.dart';
@@ -27,10 +28,12 @@ class _RateScreenState extends State<RateScreen> {
       body: Column(
         children: [
           Text(viewModel.rate.timeLastUpdateUtc),
-          ListView(
-            children: viewModel.rate.conversionRates
-                .map((e) => Text('${e.keys}'))
-                .toList(),
+          Expanded(
+            child: ListView(
+              children: viewModel.rate.conversionRates
+                  .map((e) => Text('${e}'))
+                  .toList(),
+            ),
           )
         ],
       ),

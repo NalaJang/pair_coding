@@ -19,7 +19,7 @@ class RateDto {
   num? timeNextUpdateUnix;
   String? timeNextUpdateUtc;
   String? baseCode;
-  List<Map<String, dynamic>>? conversionRates;
+  Map<String, dynamic>? conversionRates;
 
   RateDto.fromJson(dynamic json) {
     result = json['result'];
@@ -30,12 +30,7 @@ class RateDto {
     timeNextUpdateUnix = json['time_next_update_unix'];
     timeNextUpdateUtc = json['time_next_update_utc'];
     baseCode = json['base_code'];
-    conversionRates = json['conversion_rates'].forEach((currency, rate) {
-      conversionRates?.add({
-        'currency': currency,
-        'rate': rate,
-      });
-    });
+    conversionRates = json['conversion_rates'];
   }
 
   Map<String, dynamic> toJson() {

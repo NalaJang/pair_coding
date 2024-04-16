@@ -1,6 +1,8 @@
+import 'package:pair_coding/data/model/conversion_rate.dart';
+
 class Rate {
   final String timeLastUpdateUtc;
-  final List<Map<String,dynamic>> conversionRates;
+  final List<ConversionRate> conversionRates;
 
 //<editor-fold desc="Data Methods">
   const Rate({
@@ -26,7 +28,7 @@ class Rate {
 
   Rate copyWith({
     String? timeLastUpdateUtc,
-    List<Map<String, dynamic>>? conversionRates,
+    List<ConversionRate>? conversionRates,
   }) {
     return Rate(
       timeLastUpdateUtc: timeLastUpdateUtc ?? this.timeLastUpdateUtc,
@@ -34,17 +36,17 @@ class Rate {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'timeLastUpdateUtc': timeLastUpdateUtc,
       'conversionRates': conversionRates,
     };
   }
 
-  factory Rate.fromMap(Map<String, dynamic> map) {
+  factory Rate.fromJson(Map<String, dynamic> json) {
     return Rate(
-      timeLastUpdateUtc: map['timeLastUpdateUtc'] as String,
-      conversionRates: map['conversionRates'] as List<Map<String, dynamic>>,
+      timeLastUpdateUtc: json['timeLastUpdateUtc'] as String,
+      conversionRates: json['conversionRates'] as List<ConversionRate>,
     );
   }
 
