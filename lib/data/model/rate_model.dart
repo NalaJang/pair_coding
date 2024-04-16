@@ -1,12 +1,11 @@
-class Rate{
+class Rate {
   final String timeLastUpdateUtc;
-  final String country;
-  final String rate;
+  final List<Map<String,dynamic>> conversionRates;
 
 //<editor-fold desc="Data Methods">
   const Rate({
-    required this.country,
-    required this.rate,
+    required this.timeLastUpdateUtc,
+    required this.conversionRates,
   });
 
   @override
@@ -14,38 +13,41 @@ class Rate{
       identical(this, other) ||
       (other is Rate &&
           runtimeType == other.runtimeType &&
-          country == other.country &&
-          rate == other.rate);
+          timeLastUpdateUtc == other.timeLastUpdateUtc &&
+          conversionRates == other.conversionRates);
 
   @override
-  int get hashCode => country.hashCode ^ rate.hashCode;
+  int get hashCode => timeLastUpdateUtc.hashCode ^ conversionRates.hashCode;
 
   @override
   String toString() {
-    return 'Rate{ country: $country, rate: $rate,}';
+    return 'Rate{' +
+        ' timeLastUpdateUtc: $timeLastUpdateUtc,' +
+        ' conversionRates: $conversionRates,' +
+        '}';
   }
 
   Rate copyWith({
-    String? country,
-    String? rate,
+    String? timeLastUpdateUtc,
+    List<Map<String, dynamic>>? conversionRates,
   }) {
     return Rate(
-      country: country ?? this.country,
-      rate: rate ?? this.rate,
+      timeLastUpdateUtc: timeLastUpdateUtc ?? this.timeLastUpdateUtc,
+      conversionRates: conversionRates ?? this.conversionRates,
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      'country': this.country,
-      'rate': this.rate,
+      'timeLastUpdateUtc': this.timeLastUpdateUtc,
+      'conversionRates': this.conversionRates,
     };
   }
 
-  factory Rate.fromJson(Map<String, dynamic> map) {
+  factory Rate.fromMap(Map<String, dynamic> map) {
     return Rate(
-      country: map['country'] as String,
-      rate: map['rate'] as String,
+      timeLastUpdateUtc: map['timeLastUpdateUtc'] as String,
+      conversionRates: map['conversionRates'] as List<Map<String, dynamic>>,
     );
   }
 
