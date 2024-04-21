@@ -1,17 +1,3 @@
 # pair_coding
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# pair_coding
+<img width="350" alt="image" src="https://github.com/NalaJang/pair_coding/assets/73895803/1b302281-5270-4dab-b9ae-2b7c56b310e8">
